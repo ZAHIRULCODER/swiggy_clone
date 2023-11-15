@@ -27,7 +27,7 @@
 ### Installing 
 Clone the repository to your local machine
 ```bash
-git clone https://github.com/ZAHIRULCODER/Swiggy_Clone.git
+git clone 
 
 ```
 
