@@ -9,7 +9,7 @@ export const useRestaurantFetch = (resId) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId, );
+				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId);
 
 				const restaurantDets = response?.data?.data?.cards[0]?.card?.card?.info;
 				const recommend =
@@ -19,10 +19,10 @@ export const useRestaurantFetch = (resId) => {
 				setRestaurantDetails(restaurantDets);
 				setRecommended(recommend);
 
-				console.log(
-					response?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
-						?.cards
-				);
+				// console.log(
+				// 	response?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
+				// 		?.cards
+				// );
 			} catch (error) {
 				console.log(`Failed to Fetch Restaurant Details: ${error}`);
 			}

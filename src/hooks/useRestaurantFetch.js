@@ -14,7 +14,7 @@ export const useRestaurantFetch = () => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(FETCH_RESTAURANTS, );
+				const response = await axios.get(FETCH_RESTAURANTS);
 
 				const restaurants =
 					response?.data?.data?.cards[5]?.card?.card?.gridElements
@@ -25,10 +25,10 @@ export const useRestaurantFetch = () => {
 
 				setFilteredRestaurant(restaurants);
 
-				console.log(
-					response?.data?.data?.cards[5]?.card?.card?.gridElements
-						?.infoWithStyle?.restaurants
-				);
+				// console.log(
+				// 	response?.data?.data?.cards[5]?.card?.card?.gridElements
+				// 		?.infoWithStyle?.restaurants
+				// );
 			} catch (error) {
 				console.log(`Failed to Fetch Restaurant: ${error}`);
 			}
