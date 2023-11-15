@@ -1,6 +1,6 @@
 # Swiggy Clone using Swiggy API
 
-## Note: Sometimes data is not fetched because of some kind of limit by swiggy in there backend> So please refresh the page or restart the server
+## Note: Sometimes data is not fetched because of some kind of limit by swiggy in there backend. So please refresh the page or restart the server
 
 
 ## This project is a Swiggy clone that utilizes the Swiggy API to replicate some of the functionalities of the popular food delivery platform Swiggy. This project is developed as a learning exercise and is not intended for commercial use.
@@ -27,7 +27,7 @@
 ### Installing 
 Clone the repository to your local machine
 ```bash
-git clone 
+git clone https://github.com/ZAHIRULCODER/Swiggy_Clone.git
 
 ```
 
