@@ -18,7 +18,7 @@ const RestaurantDetail = () => {
 		const itemToAdd = {
 			id: item?.id,
 			name: item?.name,
-			price: item?.price / 100 || item.defaultPrice / 100,
+			price: item?.price / 100 || item?.defaultPrice / 100,
 		};
 		dispatch(addToCart(itemToAdd));
 	};
@@ -32,7 +32,7 @@ const RestaurantDetail = () => {
 
 	if (!restaurantDetails) return null;
 
-	return (restaurantDetails?.length || recommended?.length) === 0 ? (
+	return restaurantDetails?.length === 0 ? (
 		<ShimmerUI />
 	) : (
 		<div className="flex justify-center mt-10 ">
@@ -80,7 +80,7 @@ const RestaurantDetail = () => {
 					</div>
 				</div>
 
-				{/* {RECOMMENDED Section Starts here} */}
+				{/* {MENU Section Starts here} */}
 				<div className="bg-white pt-6 pb-8 mb-4">
 					<div className="mb-4">
 						<h1 className="text-green-600 font-bold uppercase underline tracking-wide">

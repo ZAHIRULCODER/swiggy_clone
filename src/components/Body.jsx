@@ -27,7 +27,7 @@ const Body = () => {
 	) : (
 		<div className="flex flex-row flex-wrap justify-center mx-2 ">
 			{/* no restaurants found logic */}
-			{filteredRestaurant.length > 0 ? (
+			{filteredRestaurant?.length > 0 ? (
 				filteredRestaurant.map((restaurant) => (
 					<Link
 						to={`/restaurants/${restaurant?.info?.id}`}
