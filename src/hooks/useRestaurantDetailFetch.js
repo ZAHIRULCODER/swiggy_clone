@@ -9,7 +9,9 @@ export const useRestaurantDetailFetch = (resId) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId);
+				const response = await axios.get(
+					`${FETCH_RESTAURANT_DETAILS}&restaurantId=${resId}`
+				);
 
 				const restaurantDets = response?.data?.data?.cards[0]?.card?.card?.info;
 				const recommend =

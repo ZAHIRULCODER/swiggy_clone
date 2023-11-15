@@ -17,5 +17,5 @@ export const FETCH_RESTAURANTS =
 export const FETCH_RESTAURANT_DETAILS =
 	"https://corsproxy.io/?" +
 	encodeURIComponent(
-		"https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.572646&lng=88.36389500000001&restaurantId="
+		"https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.572646&lng=88.36389500000001"
 	);
