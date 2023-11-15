@@ -12,7 +12,7 @@ export const useRestaurantFetch = (resId) => {
 				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId, {
 					headers: {
 						"Access-Control-Allow-Origin": "*",
-						"Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+						
 					},
 				});
 
