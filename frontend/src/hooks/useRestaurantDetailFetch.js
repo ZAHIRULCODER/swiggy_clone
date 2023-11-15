@@ -2,19 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FETCH_RESTAURANT_DETAILS } from "../constant";
 
-export const useRestaurantFetch = (resId) => {
+export const useRestaurantDetailFetch = (resId) => {
 	const [restaurantDetails, setRestaurantDetails] = useState([]);
 	const [recommended, setRecommended] = useState([]);
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId, {
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-						"Content-Type": "application/json",
-					},
-				});
+				const response = await axios.get(FETCH_RESTAURANT_DETAILS + resId);
 
 				const restaurantDets = response?.data?.data?.cards[0]?.card?.card?.info;
 				const recommend =

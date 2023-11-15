@@ -11,6 +11,7 @@ const RestaurantCard = ({
 	cloudinaryImageId,
 	aggregatedDiscountInfoV3,
 }) => {
+	
 	return (
 		<div className="flex justify-center items-center gap-4 m-6 flex-wrap ">
 			<div className=" hover:scale-110 transition-transform duration-300 ease-in-out w-[270px] ">

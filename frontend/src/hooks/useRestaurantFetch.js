@@ -14,12 +14,7 @@ export const useRestaurantFetch = () => {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(FETCH_RESTAURANTS, {
-					headers: {
-						"Access-Control-Allow-Origin": "*",
-						"Content-Type": "application/json",
-					},
-				});
+				const response = await axios.get(FETCH_RESTAURANTS);
 
 				const restaurants =
 					response?.data?.data?.cards[5]?.card?.card?.gridElements

@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FaClock, FaStar } from "react-icons/fa";
 import ShimmerUI from "./ShimmerUI";
-import { useRestaurantFetch } from "../hooks/useRestaurantDetailFetch";
+import { useRestaurantDetailFetch } from "../hooks/useRestaurantDetailFetch";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../features/cart/cartSlice";
 
@@ -10,7 +10,7 @@ const RestaurantDetail = () => {
 	const { resId } = useParams();
 
 	//custom hook to fetch all restaurantDetails and recommended section
-	const { restaurantDetails, recommended } = useRestaurantFetch(resId);
+	const { restaurantDetails, recommended } = useRestaurantDetailFetch(resId);
 
 	const dispatch = useDispatch();
 
