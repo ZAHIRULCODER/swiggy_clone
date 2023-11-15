@@ -1,6 +1,9 @@
 # Swiggy Clone using Swiggy API
 
+### Deployed Link: [Swiggy Clone (Click Here)](https://swiggy-clone-sk-zahirul-islam.vercel.app/)
+
 ## Note: Sometimes data is not fetched because of some kind of limit by swiggy in there backend. So please refresh the page or restart the server
+
 
 
 ## This project is a Swiggy clone that utilizes the Swiggy API to replicate some of the functionalities of the popular food delivery platform Swiggy. This project is developed as a learning exercise and is not intended for commercial use.
