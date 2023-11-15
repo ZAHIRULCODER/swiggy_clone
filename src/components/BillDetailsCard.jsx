@@ -17,14 +17,14 @@ const BillDetailsCard = () => {
 		items.reduce((acc, item) => acc + item?.price, 0);
 
 	const handlePayment = () => {
-		if (!submitted || address.length === 0) {
+		if (!submitted || address?.length === 0) {
 			toast.error("Please add shipping address first");
 		} else {
 			setShowSpinner(true);
 			setTimeout(() => {
 				setShowSpinner(false);
 				toast.success("Payment Successful");
-				window.location.href = "/paymentsuccessful";
+				window?.location?.href = "/paymentsuccessful";
 			}, 2000);
 		}
 	};
