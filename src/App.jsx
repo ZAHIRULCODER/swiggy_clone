@@ -57,7 +57,7 @@ export const appRouter = createBrowserRouter([
 					</Suspense>
 				),
 			},
-			{ path: "paymentsuccessful", element: <PaymentSuccessful /> },
+			{ path: "/paymentsuccessful", element: <PaymentSuccessful /> },
 		],
 	},
 ]);

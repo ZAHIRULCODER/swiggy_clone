@@ -3,15 +3,12 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../features/cart/cartSlice";
 import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
 
 const BillDetailsCard = () => {
 	const cartItems = useSelector((store) => store.cart.items);
 	const address = useSelector((store) => store.address.value);
 	const submitted = useSelector((store) => store.address.submitted);
 	const [showSpinner, setShowSpinner] = useState(false);
-
-	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
@@ -26,7 +23,7 @@ const BillDetailsCard = () => {
 			setTimeout(() => {
 				setShowSpinner(false);
 				toast.success("Payment Successful");
-				navigate("/paymentsuccessful");
+				window.location.href = "/paymentsuccessful";
 			}, 2000);
 		}
 	};
