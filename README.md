@@ -25,6 +25,8 @@
 - Important you need to install cors extention although I have set the proxy still download it
 - Nodej.js (Javascript runtime)
 - React + vite
+- Tailwindcss
+- React icons
 - Redux Toolkit
 
 ### Installing 
