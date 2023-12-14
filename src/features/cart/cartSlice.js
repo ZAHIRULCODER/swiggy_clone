@@ -4,34 +4,45 @@ const cartSlice = createSlice({
 	name: "cart",
 	initialState: {
 		items: [],
+		itemCount: 0,
 	},
 	reducers: {
 		//add to cart is an action rest is reducer function. state is the initialState and actionpayload is the data which is comming in. (This function does not return anything. It just updates the state directly).
 		addToCart: (state, action) => {
-			state.items.push(action.payload);
+			const newItem = action.payload;
+			const existingItem = state.items.find((item) => item.id === newItem.id);
+			if (existingItem) {
+				existingItem.quantity += 1;
+			} else {
+				state.items.push({ ...newItem, quantity: 1 });
+			}
+			state.itemCount += 1; // Increment total item count
 		},
 		removeFromCart: (state, action) => {
-			let foundItem = false; // This flag will help us track if we've removed an item
+			const itemIdToRemove = action.payload.id;
 
-			state.items = state.items.reduce((acc, currItem) => {
-				//accumulator will be our new array
-				// currItem is the current item in the array we're looking at
+			// Find the index of the item to be removed in the cart
+			const itemIndex = state.items.findIndex(
+				(item) => item.id === itemIdToRemove
+			);
 
-				if (!foundItem && currItem.id === action.payload.id) {
-					// If we haven't removed an currItem yet, and the current item's id matches
-					// the id we want to remove, we set found to true and skip adding this item to accumulator
+			// If the item is in the cart
+			if (itemIndex !== -1) {
+				const removedItem = state.items[itemIndex];
 
-					foundItem = true;
-					return acc;
+				// If the item has more than 1 quantity, decrease the quantity
+				if (removedItem.quantity > 1) {
+					removedItem.quantity -= 1;
+				} else {
+					// If the item has only 1 quantity, remove it from the cart
+					state.items.splice(itemIndex, 1);
 				}
-
-				// If the current item's id doesn't match, or we already removed an item,
-				// we add this item to accumulator
-				return [...acc, currItem];
-			}, []); // [] is the initial value for accumulator, starting as an empty array
+				state.itemCount -= 1;
+			}
 		},
 		clearCart: (state) => {
 			state.items = [];
+			state.itemCount = 0;
 		},
 	},
 });
@@ -39,18 +50,6 @@ const cartSlice = createSlice({
 export const { addToCart, removeFromCart, clearCart } = cartSlice.actions; //it will export all the actions which are in the reducers
 
 export default cartSlice.reducer; //it will combine all reducers so it will be reducer not reducers
-
-
-
-
-
-
-
-
-
-
-
-
 
 /** 
 Behind the scenes I guess

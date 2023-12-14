@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BsCartCheck } from "react-icons/bs";
 import { useAuth } from "../hooks/useAuth";
 import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Search from "./Search";
 import brandLogo from "../assets/brand.png";
 import CartHoverCard from "./CartHoverCard";
+import { useSelector } from "react-redux";
 
 const Logo = () => {
 	return (
@@ -25,8 +25,7 @@ const Header = () => {
 	// Placeholder to maintain layout structure when Search is not rendered
 	const SearchPlaceholder = () => <div className="flex-grow"></div>;
 
-	const cartItems = useSelector((store) => store.cart.items);
-	// console.log(cartItems);
+	const itemCount = useSelector((store) => store.cart.itemCount);
 
 	return (
 		<>
@@ -53,10 +52,10 @@ const Header = () => {
 							<Link
 								to="/checkout"
 								className={`flex items-center gap-1  ${
-									cartItems.length > 0 ? "text-green-500" : ""
+									itemCount > 0 ? "text-green-500" : ""
 								} `}>
 								<BsCartCheck size={30} />
-								Cart ({cartItems?.length})
+								Cart ({itemCount})
 							</Link>
 							{isCartHovered && <CartHoverCard />}
 						</div>

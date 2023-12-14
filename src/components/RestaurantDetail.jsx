@@ -18,6 +18,7 @@ const RestaurantDetail = () => {
 		const itemToAdd = {
 			id: item?.id,
 			name: item?.name,
+			quantity: item?.quantity,
 			price: item?.price / 100 || item?.defaultPrice / 100,
 		};
 		dispatch(addToCart(itemToAdd));

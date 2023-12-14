@@ -6,7 +6,7 @@ const CartHoverCard = () => {
 	const cartItems = useSelector((store) => store.cart.items);
 
 	const calculateTotal = (items) =>
-		items.reduce((acc, item) => acc + item?.price, 0);
+		items.reduce((acc, item) => acc + item?.price * item?.quantity, 0);
 
 	return cartItems?.length === 0 ? (
 		<div className="absolute right-[280px] mt-[250px] border-t-2 border-orange-600 p-2 w-80 bg-white  shadow-2xl z-10">
@@ -28,8 +28,12 @@ const CartHoverCard = () => {
 					<div
 						key={index}
 						className="flex justify-between items-center py-2 border-b">
-						<span className="truncate text-sm">{item?.name}</span>
-						<span className="whitespace-nowrap">₹ {item?.price}</span>
+						<span className="truncate text-sm">
+							<span className="text-orange-600">{item?.quantity}x</span> {item?.name}
+						</span>
+						<span className="whitespace-nowrap">
+							₹ {item?.price * item?.quantity}{" "}
+						</span>
 					</div>
 				))}
 			</div>
