@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
 const HelpSupport = () => {
 	const [activeSection, setActiveSection] = useState(null);
@@ -95,7 +95,7 @@ const Section = ({ title, description, isVisible, setIsVisible }) => {
 				onClick={setIsVisible}
 				className="font-bold text-lg flex justify-between items-center mx-auto w-full py-3 hover:text-orange-600">
 				{title}
-				<FaAngleDown />
+				{isVisible ? <FaAngleUp /> : <FaAngleDown />}
 			</button>
 			{isVisible && <p>{description}</p>}
 			<hr className="my-5" />
