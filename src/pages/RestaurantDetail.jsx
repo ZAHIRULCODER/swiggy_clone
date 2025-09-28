@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { FaClock, FaStar } from "react-icons/fa";
+import { FaClock, FaStar, FaRupeeSign } from "react-icons/fa";
 import { RestaurantDetailShimmer } from "../components/RestaurantDetailShimmer";
 import { useRestaurantDetailFetch } from "../hooks/useRestaurantDetailFetch";
 import { useDispatch } from "react-redux";
@@ -43,56 +43,63 @@ export default function RestaurantDetail() {
 
    return (
       <section className="section-wrapper space-y-10">
-         <article className="surface-card rounded-3xl p-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-               <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
+         <article className="surface-card rounded-3xl border border-slate-200/60 bg-white/95 px-6 py-8 shadow-soft sm:px-10 sm:py-10">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+               <div className="space-y-4">
+                  <span className="inline-flex items-center rounded-full bg-orange-50 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.4em] text-orange-500">
                      {restaurantDetails?.city}
-                  </p>
-                  <h1 className="text-3xl font-semibold text-slate-900">
-                     {restaurantDetails?.name}
-                  </h1>
-                  <p className="text-sm font-medium text-slate-500">
-                     {restaurantDetails?.cuisines?.join(", ")}
-                  </p>
-                  <p className="text-sm text-slate-500">
-                     {restaurantDetails?.areaName} •{" "}
-                     {restaurantDetails?.sla?.lastMileTravelString}
-                  </p>
+                  </span>
+                  <div className="space-y-2">
+                     <h1 className="text-3xl font-semibold text-slate-900">
+                        {restaurantDetails?.name}
+                     </h1>
+                     <p className="text-sm font-medium text-slate-500">
+                        {restaurantDetails?.cuisines?.join(", ")}
+                     </p>
+                     <p className="text-sm text-slate-500">
+                        {restaurantDetails?.areaName}
+                        {restaurantDetails?.sla?.lastMileTravelString && (
+                           <span className="text-slate-400">
+                              {" "}
+                              • {restaurantDetails?.sla?.lastMileTravelString}
+                           </span>
+                        )}
+                     </p>
+                  </div>
 
                   {restaurantDetails?.feeDetails?.message && (
-                     <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2 text-xs font-semibold text-orange-600">
+                     <div className="inline-flex items-center gap-2 rounded-2xl bg-orange-50 px-4 py-2 text-xs font-semibold text-orange-600 shadow-soft/20 ring-1 ring-orange-200/60">
                         <img
                            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_18,h_18/v1648635511/Delivery_fee_new_cjxumu"
                            alt="Delivery icon"
+                           className="h-4 w-4"
                         />
                         {restaurantDetails?.feeDetails?.message}
                      </div>
                   )}
                </div>
 
-               <div className="flex flex-col gap-4 rounded-2xl bg-slate-50/70 p-6 text-sm">
+               <div className="flex w-full max-w-xs flex-col gap-4 rounded-3xl bg-slate-50 px-6 py-6 text-sm text-slate-600 shadow-inner ring-1 ring-slate-200/70 sm:max-w-sm">
                   <div className="flex items-center gap-3">
-                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-emerald-100 text-lg text-emerald-600">
                         <FaStar />
                      </span>
                      <div>
-                        <p className="text-lg font-semibold text-slate-900">
+                        <p className="text-2xl font-semibold text-slate-900 leading-none">
                            {restaurantDetails?.avgRatingString}
                         </p>
-                        <p className="text-xs font-medium text-slate-500">
+                        <p className="mt-1 text-xs font-medium text-slate-500">
                            {restaurantDetails?.totalRatingsString}
                         </p>
                      </div>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-600">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
                      <FaClock className="text-orange-500" />
-                     <span className="font-semibold">
-                        {restaurantDetails?.sla?.slaString}
-                     </span>
+                     <span>{restaurantDetails?.sla?.slaString}</span>
                   </div>
-                  <div className="text-sm font-semibold text-slate-600">
-                     {restaurantDetails?.costForTwoMessage}
+                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+                     <FaRupeeSign className="text-slate-500" />
+                     <span>{restaurantDetails?.costForTwoMessage}</span>
                   </div>
                </div>
             </div>
