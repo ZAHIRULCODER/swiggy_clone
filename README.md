@@ -2,8 +2,6 @@
 
 ### Deployed Link: [Swiggy Clone (Click Here)](https://swiggy-clone-sk-zahirul-islam.vercel.app/)
 
-## Note: Sometimes data is not fetched because of some kind of limit by swiggy in there backend. So please refresh the page or restart the server
-
 
 
 ## This project is a Swiggy clone that utilizes the Swiggy API to replicate some of the functionalities of the popular food delivery platform Swiggy. This project is developed as a learning exercise and is not intended for commercial use.
@@ -22,8 +20,7 @@
 
 
 ## Prerequisites & Built With
-- Important you need to install cors extention although I have set the proxy still download it
-- Nodej.js (Javascript runtime)
+- Nodej.js
 - React + vite
 - Tailwindcss
 - React icons
@@ -45,6 +42,3 @@ npm install
 ```bash
 npm run dev
 ```
-
-http://localhost:5173 in your browser to view the application
-
