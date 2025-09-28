@@ -11,8 +11,8 @@ export function RestaurantCard({
    aggregatedDiscountInfoV3,
 }) {
    return (
-      <article className="group relative w-full max-w-xs transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02]">
-         <div className="surface-card overflow-hidden">
+      <article className="group relative flex h-full w-full max-w-xs flex-col transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02]">
+         <div className="surface-card flex h-full min-h-[22rem] flex-col overflow-hidden">
             <div className="relative aspect-[4/3] overflow-hidden">
                <img
                   src={IMG_CDN_URL + cloudinaryImageId}
@@ -32,12 +32,12 @@ export function RestaurantCard({
                )}
             </div>
 
-            <div className="space-y-3 px-5 pb-5 pt-4">
+            <div className="flex flex-1 flex-col gap-3 px-5 pb-5 pt-4">
                <div className="flex items-start justify-between gap-3">
                   <h3 className="truncate text-lg font-semibold text-slate-900">
                      {name}
                   </h3>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-600">
+                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-600">
                      <FaStar className="text-emerald-500" />
                      {avgRatingString}
                   </span>
@@ -54,7 +54,9 @@ export function RestaurantCard({
                   <span className="truncate">{areaName}</span>
                </div>
 
-               <p className="text-sm text-slate-500">{cuisines?.join(", ")}</p>
+               <p className="line-clamp-2 text-sm text-slate-500">
+                  {cuisines?.join(", ")}
+               </p>
             </div>
          </div>
          <span className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent transition duration-300 group-hover:border-orange-200" />
