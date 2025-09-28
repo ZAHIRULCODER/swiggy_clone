@@ -4,7 +4,6 @@ import addressSlice from "../features/address/addressSlice";
 
 const store = configureStore({
 	reducer: {
-		//name of slice: slice
 		cart: cartSlice,
 		address: addressSlice,
 	},

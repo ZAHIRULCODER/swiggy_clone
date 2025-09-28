@@ -4,9 +4,9 @@ export const IMG_CDN_URL = `https://media-assets.swiggy.com/swiggy/image/upload/
 
 //Cors fixed
 export const FETCH_RESTAURANTS =
-	CORSPROXY +
-	"https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+   CORSPROXY +
+   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const FETCH_RESTAURANT_DETAILS =
-	CORSPROXY +
-	"https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.572646&lng=88.36389500000001";
+   CORSPROXY +
+   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.572646&lng=88.36389500000001";
