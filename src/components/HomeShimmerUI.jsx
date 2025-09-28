@@ -1,35 +1,27 @@
 export function HomeShimmerUI() {
    return (
-      <div className="flex flex-row flex-wrap justify-center mx-2">
-         {Array.from({ length: 10 }).map((_, index) => (
+      <section className="grid-responsive mt-6">
+         {Array.from({ length: 12 }).map((_, index) => (
             <div
                key={index}
-               className="flex justify-center items-center gap-4 m-6 flex-wrap"
+               className="surface-card animate-pulse overflow-hidden"
             >
-               <div className="animate-pulse w-[270px]">
-                  {/* Image shimmer */}
-                  <div className="relative">
-                     <div className="h-[180px] w-full bg-slate-400 rounded-2xl"></div>
-                     {/* Discount overlay shimmer (show on some cards) */}
-                     {index % 3 === 0 && (
-                        <div className="absolute bottom-0 rounded-b-2xl w-full bg-slate-500 p-1">
-                           <div className="h-5 bg-slate-600 rounded"></div>
-                        </div>
-                     )}
+               <div className="relative aspect-[4/3] bg-slate-200">
+                  {index % 2 === 0 && (
+                     <div className="absolute inset-x-4 bottom-4 h-6 rounded-full bg-slate-300/80"></div>
+                  )}
+               </div>
+               <div className="space-y-3 px-5 pb-5 pt-4">
+                  <div className="h-5 w-3/4 rounded-full bg-slate-200"></div>
+                  <div className="flex items-center gap-3">
+                     <div className="h-4 w-1/3 rounded-full bg-slate-200"></div>
+                     <div className="h-4 w-12 rounded-full bg-slate-200"></div>
                   </div>
-                  {/* Text content shimmer */}
-                  <div className="mt-2.5">
-                     {/* Name */}
-                     <div className="h-5 bg-slate-400 rounded mt-2.5 ml-2 w-3/4"></div>
-                     {/* Rating and SLA */}
-                     <div className="h-4 bg-slate-400 rounded ml-2 my-1.5 w-1/2"></div>
-                     {/* Cuisines and Area */}
-                     <div className="h-4 bg-slate-400 rounded ml-2 w-2/3"></div>
-                     <div className="h-4 bg-slate-400 rounded ml-2 w-1/2"></div>
-                  </div>
+                  <div className="h-4 w-full rounded-full bg-slate-200"></div>
+                  <div className="h-4 w-2/3 rounded-full bg-slate-200"></div>
                </div>
             </div>
          ))}
-      </div>
+      </section>
    );
 }

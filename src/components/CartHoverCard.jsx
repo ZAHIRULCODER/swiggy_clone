@@ -7,48 +7,58 @@ export function CartHoverCard() {
    const calculateTotal = (items) =>
       items.reduce((acc, item) => acc + item?.price * item?.quantity, 0);
 
-   return cartItems?.length === 0 ? (
-      <div className="absolute right-[280px] mt-[250px] border-t-2 border-orange-600 p-2 w-80 bg-white  shadow-2xl z-10">
-         <div className="px-4 py-3">
-            <h3 className="text-2xl pb-6 font-bold text-gray-900">
-               Cart Empty
-            </h3>
-            <p className="text-lg text-gray-500">
-               Good food is always cooking! Go ahead, order some yummy items
-               from the menu.
-            </p>
-         </div>
-      </div>
-   ) : (
-      <div className="absolute right-[275px] mt-[460px] text-black border-t-2 border-orange-600 p-5 bg-white shadow-2xl z-10 w-[370px] ">
-         <div className="text-lg font-bold mb-4">
-            <h1>Your Items</h1>
-         </div>
-         <div className="mb-6 h-[200px] overflow-auto">
-            {cartItems.map((item, index) => (
-               <div
-                  key={index}
-                  className="flex justify-between items-center py-2 border-b"
-               >
-                  <span className="truncate text-sm">
-                     <span className="text-orange-600">{item?.quantity}x</span>{" "}
-                     {item?.name}
-                  </span>
-                  <span className="whitespace-nowrap">
-                     ₹ {item?.price * item?.quantity}{" "}
-                  </span>
+   return (
+      <div className="absolute right-0 mt-3 w-80 origin-top-right rounded-3xl border border-slate-200/70 bg-white/95 p-5 text-slate-800 shadow-2xl shadow-slate-900/20 backdrop-blur transition">
+         {cartItems?.length === 0 ? (
+            <div className="space-y-3 text-center">
+               <h3 className="text-lg font-semibold text-slate-900">
+                  Cart empty
+               </h3>
+               <p className="text-sm text-slate-500">
+                  Good food is always cooking! Explore the menu to add your
+                  first treat.
+               </p>
+            </div>
+         ) : (
+            <>
+               <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-base font-semibold text-slate-900">
+                     Your items
+                  </h3>
+                  <span className="badge-soft">{cartItems.length} saved</span>
                </div>
-            ))}
-         </div>
-         <div className="flex justify-between items-center font-bold mb-4">
-            <span>Sub total</span>
-            <span>₹ {calculateTotal(cartItems).toFixed(2)}</span>
-         </div>
-         <Link to={"/checkout"}>
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 w-full rounded">
-               CHECKOUT
-            </button>
-         </Link>
+               <div className="mb-5 max-h-56 space-y-3 overflow-auto pr-2">
+                  {cartItems.map((item, index) => (
+                     <div
+                        key={`${item?.id}-${index}`}
+                        className="flex items-start justify-between gap-3 rounded-2xl bg-slate-50/70 px-3 py-2 text-sm"
+                     >
+                        <div className="flex flex-col">
+                           <span className="text-xs font-semibold uppercase tracking-wide text-orange-500">
+                              {item?.quantity}×
+                           </span>
+                           <span className="font-medium text-slate-900">
+                              {item?.name}
+                           </span>
+                        </div>
+                        <span className="whitespace-nowrap font-semibold text-slate-900">
+                           ₹ {(item?.price * item?.quantity).toFixed(2)}
+                        </span>
+                     </div>
+                  ))}
+               </div>
+               <div className="mb-5 flex items-center justify-between text-sm font-semibold text-slate-900">
+                  <span>Subtotal</span>
+                  <span>₹ {calculateTotal(cartItems).toFixed(2)}</span>
+               </div>
+               <Link
+                  to="/checkout"
+                  className="btn-primary w-full justify-center"
+               >
+                  Review cart
+               </Link>
+            </>
+         )}
       </div>
    );
 }

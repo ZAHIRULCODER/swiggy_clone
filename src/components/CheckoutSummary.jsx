@@ -3,14 +3,11 @@ import { BillDetailsCard } from "./BillDetailsCard";
 
 export function CheckoutSummary() {
    return (
-      <>
-         <div className="flex justify-between">
-            {/* Left */}
+      <section className="section-wrapper">
+         <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
             <AddAdress />
-
-            {/* Right */}
             <BillDetailsCard />
          </div>
-      </>
+      </section>
    );
 }

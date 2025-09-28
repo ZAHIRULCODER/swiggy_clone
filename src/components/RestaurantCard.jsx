@@ -11,39 +11,53 @@ export function RestaurantCard({
    aggregatedDiscountInfoV3,
 }) {
    return (
-      <div className="flex justify-center items-center gap-4 m-6 flex-wrap ">
-         <div className=" hover:scale-110 transition-transform duration-300 ease-in-out w-[270px] ">
-            <div className="relative">
+      <article className="group relative w-full max-w-xs transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02]">
+         <div className="surface-card overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden">
                <img
                   src={IMG_CDN_URL + cloudinaryImageId}
                   alt={`Image of ${name}`}
-                  className="h-[180px] block w-full rounded-2xl object-cover shadow-2xl shadow-gray-400/50"
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-110"
+                  loading="lazy"
                />
                {aggregatedDiscountInfoV3 && (
-                  <div className="absolute bottom-0 rounded-b-2xl w-full bg-black bg-opacity-50 text-white p-1">
-                     <p className="text-lg font-extrabold pl-2">
-                        {aggregatedDiscountInfoV3?.header}{" "}
-                        {aggregatedDiscountInfoV3?.subHeader}
-                     </p>
+                  <div className="absolute inset-x-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-slate-900/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-lg shadow-slate-900/40">
+                     <span>{aggregatedDiscountInfoV3?.header}</span>
+                     {aggregatedDiscountInfoV3?.subHeader && (
+                        <span className="text-orange-300">
+                           {aggregatedDiscountInfoV3?.subHeader}
+                        </span>
+                     )}
                   </div>
                )}
             </div>
-            <div className="mt-2.5 text-gray-700">
-               <h3 className="truncate mt-2.5 text-lg ml-2 font-bold">
-                  {name}
-               </h3>
-               <h4 className="text-md ml-2 my-1.5 flex items-center">
-                  <FaStar color="green" className="mr-1 " />
-                  <span className="font-bold">{avgRatingString}</span>
-                  <span className="mx-1 font-bold">•</span>
-                  <span className="font-bold">{sla?.slaString}</span>
-               </h4>
-               <p className="truncate text-gray-600 ml-2 text-base ">
-                  {cuisines?.join(", ")} <br />
-                  {areaName}
-               </p>
+
+            <div className="space-y-3 px-5 pb-5 pt-4">
+               <div className="flex items-start justify-between gap-3">
+                  <h3 className="truncate text-lg font-semibold text-slate-900">
+                     {name}
+                  </h3>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-600">
+                     <FaStar className="text-emerald-500" />
+                     {avgRatingString}
+                  </span>
+               </div>
+
+               <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] uppercase tracking-wide text-slate-600">
+                     {sla?.slaString}
+                  </span>
+                  <span
+                     className="h-1 w-1 rounded-full bg-slate-300"
+                     aria-hidden
+                  />
+                  <span className="truncate">{areaName}</span>
+               </div>
+
+               <p className="text-sm text-slate-500">{cuisines?.join(", ")}</p>
             </div>
          </div>
-      </div>
+         <span className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent transition duration-300 group-hover:border-orange-200" />
+      </article>
    );
 }

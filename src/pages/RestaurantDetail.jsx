@@ -13,12 +13,19 @@ export default function RestaurantDetail() {
 
    const dispatch = useDispatch();
 
+   const curatedItems =
+      recommended
+         ?.flatMap((section) => section?.card?.card?.itemCards || [])
+         .map((itemCard) => itemCard?.card?.info)
+         .filter(Boolean) || [];
+
    const handleAddItem = (item) => {
+      const unitPrice = (item?.price ?? item?.defaultPrice ?? 0) / 100;
       const itemToAdd = {
          id: item?.id,
          name: item?.name,
-         quantity: item?.quantity,
-         price: item?.price / 100 || item?.defaultPrice / 100,
+         quantity: 1,
+         price: unitPrice,
       };
       dispatch(addToCart(itemToAdd));
    };
@@ -30,96 +37,122 @@ export default function RestaurantDetail() {
       dispatch(removeFromCart(itemToRemove));
    };
 
-   if (!restaurantDetails) return null;
+   if (!restaurantDetails?.name) {
+      return <RestaurantDetailShimmer />;
+   }
 
-   return restaurantDetails?.length === 0 ? (
-      <RestaurantDetailShimmer />
-   ) : (
-      <div className="flex justify-center mt-10 ">
-         <div className="bg-white p-4 border w-[800px]">
-            <h1 className="text-xl font-bold">{restaurantDetails?.name}</h1>
-            <p className="text-gray-500">
-               {restaurantDetails?.cuisines?.join(", ")}
-            </p>
-            <div className="flex justify-between  ">
-               <div className="text-gray-700">
-                  <span>
-                     {restaurantDetails?.areaName},{" "}
-                     {restaurantDetails?.sla?.lastMileTravelString}{" "}
-                  </span>
+   return (
+      <section className="section-wrapper space-y-10">
+         <article className="surface-card rounded-3xl p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+               <div className="space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
+                     {restaurantDetails?.city}
+                  </p>
+                  <h1 className="text-3xl font-semibold text-slate-900">
+                     {restaurantDetails?.name}
+                  </h1>
+                  <p className="text-sm font-medium text-slate-500">
+                     {restaurantDetails?.cuisines?.join(", ")}
+                  </p>
+                  <p className="text-sm text-slate-500">
+                     {restaurantDetails?.areaName} •{" "}
+                     {restaurantDetails?.sla?.lastMileTravelString}
+                  </p>
+
+                  {restaurantDetails?.feeDetails?.message && (
+                     <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2 text-xs font-semibold text-orange-600">
+                        <img
+                           src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_18,h_18/v1648635511/Delivery_fee_new_cjxumu"
+                           alt="Delivery icon"
+                        />
+                        {restaurantDetails?.feeDetails?.message}
+                     </div>
+                  )}
                </div>
-               <div className="max-w-xs  rounded overflow-hidden shadow-lg bg-white p-4 -mt-10">
-                  <div className="flex items-center">
-                     <FaStar className="text-green-500" />
-                     <span className="text-green-500 font-bold text-sm ml-2">
-                        {restaurantDetails?.avgRatingString}
+
+               <div className="flex flex-col gap-4 rounded-2xl bg-slate-50/70 p-6 text-sm">
+                  <div className="flex items-center gap-3">
+                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                        <FaStar />
+                     </span>
+                     <div>
+                        <p className="text-lg font-semibold text-slate-900">
+                           {restaurantDetails?.avgRatingString}
+                        </p>
+                        <p className="text-xs font-medium text-slate-500">
+                           {restaurantDetails?.totalRatingsString}
+                        </p>
+                     </div>
+                  </div>
+                  <div className="flex items-center gap-3 text-slate-600">
+                     <FaClock className="text-orange-500" />
+                     <span className="font-semibold">
+                        {restaurantDetails?.sla?.slaString}
                      </span>
                   </div>
-                  <div className="text-gray-700 text-sm mt-2">
-                     {restaurantDetails?.totalRatingsString}
+                  <div className="text-sm font-semibold text-slate-600">
+                     {restaurantDetails?.costForTwoMessage}
                   </div>
                </div>
             </div>
-            {restaurantDetails?.feeDetails?.message && (
-               <div className="flex gap-2 ">
-                  <img
-                     src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_18,h_18/v1648635511/Delivery_fee_new_cjxumu"
-                     alt=""
-                  />
-                  <span>{restaurantDetails?.feeDetails?.message}</span>
-               </div>
-            )}
+         </article>
 
-            <div className="flex gap-5 items-center border-t border-gray-300 my-5 font-extrabold">
-               <div className="text-gray-700 my-5 flex items-center">
-                  <FaClock className="mr-2" />
-                  <span>{restaurantDetails?.sla?.slaString}</span>
+         <div className="space-y-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+               <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
+                     curated menu
+                  </p>
+                  <h2 className="text-2xl font-semibold text-slate-900">
+                     Signature dishes & chef specials
+                  </h2>
                </div>
-               <div className="text-gray-700">
-                  <span>{restaurantDetails?.costForTwoMessage}</span>
-               </div>
+               <span className="badge-soft">{curatedItems.length} items</span>
             </div>
 
-            {/* {MENU Section Starts here} */}
-            <div className="bg-white pt-6 pb-8 mb-4">
-               <div className="mb-4">
-                  <h1 className="text-green-600 font-bold uppercase underline tracking-wide">
-                     MENU
-                  </h1>
-               </div>
-
-               {recommended?.slice(1, 15)?.map((item) =>
-                  item?.card?.card?.itemCards?.map((itemCard) => (
+            <div className="space-y-4">
+               {curatedItems.length === 0 ? (
+                  <div className="rounded-3xl bg-white/80 p-10 text-center shadow-soft">
+                     <p className="text-sm text-slate-500">
+                        Menu details are temporarily unavailable. Please check
+                        back soon.
+                     </p>
+                  </div>
+               ) : (
+                  curatedItems.slice(0, 20).map((item) => (
                      <div
-                        key={itemCard?.card?.info?.id}
-                        className="flex justify-between items-center py-2 border-b-2"
+                        key={item?.id}
+                        className="flex flex-col gap-4 rounded-3xl bg-white/90 p-5 shadow-soft sm:flex-row sm:items-center sm:justify-between"
                      >
-                        <div className="flex items-center">
-                           <span className="ml-3 font-medium">
-                              {itemCard?.card?.info?.name}
-                           </span>
-                        </div>
-                        <div className="flex items-center">
-                           <span className="text-gray-900 mr-3">
+                        <div className="space-y-1">
+                           <p className="text-base font-semibold text-slate-900">
+                              {item?.name}
+                           </p>
+                           {item?.description && (
+                              <p className="text-sm text-slate-500">
+                                 {item?.description}
+                              </p>
+                           )}
+                           <div className="text-sm font-semibold text-slate-600">
                               ₹
-                              {(itemCard?.card?.info?.price ||
-                                 itemCard?.card?.info?.defaultPrice) / 100}
-                           </span>
+                              {(
+                                 (item?.price || item?.defaultPrice || 0) / 100
+                              ).toFixed(2)}
+                           </div>
+                        </div>
+                        <div className="flex items-center gap-3">
                            <button
-                              onClick={() =>
-                                 handleAddItem(itemCard?.card?.info)
-                              }
-                              className="bg-gray-200 mr-2 text-green-600 hover:bg-gray-300 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                              onClick={() => handleRemoveItem(item)}
+                              className="btn-secondary"
                            >
-                              ADD
+                              Remove
                            </button>
                            <button
-                              onClick={() =>
-                                 handleRemoveItem(itemCard?.card?.info)
-                              }
-                              className="bg-gray-200 text-red-600 hover:bg-gray-300 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                              onClick={() => handleAddItem(item)}
+                              className="btn-primary"
                            >
-                              REMOVE
+                              Add
                            </button>
                         </div>
                      </div>
@@ -127,6 +160,6 @@ export default function RestaurantDetail() {
                )}
             </div>
          </div>
-      </div>
+      </section>
    );
 }

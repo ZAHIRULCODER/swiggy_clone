@@ -6,22 +6,38 @@ export default function Checkout() {
    const cartItems = useSelector((store) => store.cart.items);
 
    return cartItems?.length === 0 ? (
-      <div className="flex justify-center items-center h-[78vh]">
-         <div className="w-[300px] text-center">
-            <img src="https://cdn.dineorder.com/public/asset/img/cook.png" />
-            <p className="text-lg font-bold"> Your cart is empty</p>
-            <p> You can go to home page to view more restaurants</p>
-            <Link to="/">
-               <button className="bg-orange-600 text-white px-6 py-2  mt-7 hover:shadow-2xl">
-                  SEE RESTAURANTS
-               </button>
-            </Link>
-         </div>
-      </div>
+      <section className="section-wrapper flex min-h-[60vh] flex-col items-center justify-center text-center">
+         <img
+            src="https://cdn.dineorder.com/public/asset/img/cook.png"
+            alt="Empty cart illustration"
+            className="h-48 w-48 object-contain"
+         />
+         <h1 className="mt-8 text-3xl font-semibold text-slate-900">
+            Your cart is empty
+         </h1>
+         <p className="mt-3 max-w-md text-sm text-slate-500">
+            Browse restaurants to add your favourite dishes. We&apos;ll be ready
+            when you are.
+         </p>
+         <Link to="/" className="btn-primary mt-8">
+            Explore restaurants
+         </Link>
+      </section>
    ) : (
-      <div>
+      <div className="space-y-12">
+         <section className="section-wrapper rounded-3xl bg-white/80 p-10 text-center shadow-soft">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
+               checkout
+            </p>
+            <h1 className="mt-3 text-3xl font-semibold text-slate-900">
+               Confirm your delivery details & secure payment
+            </h1>
+            <p className="mt-3 text-sm text-slate-500">
+               Add your delivery address, review order totals, and place your
+               order with confidence.
+            </p>
+         </section>
          <CheckoutSummary />
       </div>
    );
 }
-

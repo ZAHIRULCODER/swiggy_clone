@@ -12,11 +12,16 @@ export function BillDetailsCard() {
 
    const dispatch = useDispatch();
 
-   const calculateTotal = (items) =>
-      items.reduce((acc, item) => acc + item?.price, 0);
+   const calculateSubtotal = (items) =>
+      items.reduce((acc, item) => acc + item?.price * item?.quantity, 0);
+
+   const deliveryFee = cartItems.length ? 29 : 0;
+   const taxRate = 0.05;
+   const taxes = calculateSubtotal(cartItems) * taxRate;
+   const payable = calculateSubtotal(cartItems) + deliveryFee + taxes;
 
    const handlePayment = () => {
-      if (!submitted || address?.length === 0) {
+      if (!submitted) {
          toast.error("Please add shipping address first");
       } else {
          setShowSpinner(true);
@@ -29,41 +34,89 @@ export function BillDetailsCard() {
    };
 
    return (
-      <div className="text-center p-10">
-         <div className=" p-5 w-[370px] h-[420px] border rounded text-center ">
-            <div className="text-lg font-bold mb-4 flex justify-between">
-               <h1>Bill Details</h1>
+      <section className="relative w-full max-w-md">
+         <div className="surface-card rounded-3xl p-8">
+            <header className="mb-6 flex items-center justify-between">
+               <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
+                     Order summary
+                  </p>
+                  <h2 className="text-2xl font-semibold text-slate-900">
+                     Your basket
+                  </h2>
+               </div>
                <button
                   onClick={() => dispatch(clearCart())}
-                  className="bg-red-500 hover:bg-red-800 rounded text-base text-white p-2"
+                  className="inline-flex items-center rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-500 transition hover:border-red-200 hover:text-red-500"
                >
-                  Clear All
+                  Clear all
                </button>
+            </header>
+
+            <div className="mb-6 max-h-56 space-y-3 overflow-auto pr-2">
+               {cartItems.length === 0 ? (
+                  <p className="rounded-2xl bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
+                     Your cart is waiting for something delicious.
+                  </p>
+               ) : (
+                  cartItems.map((item, index) => (
+                     <div
+                        key={`${item?.id}-${index}`}
+                        className="flex items-start justify-between gap-3 rounded-2xl bg-slate-50/80 px-4 py-3 text-sm"
+                     >
+                        <div>
+                           <p className="text-sm font-semibold text-slate-900">
+                              {item?.name}
+                           </p>
+                           <p className="text-xs font-medium text-slate-500">
+                              Qty {item?.quantity}
+                           </p>
+                        </div>
+                        <span className="whitespace-nowrap font-semibold text-slate-900">
+                           ₹ {(item?.price * item?.quantity).toFixed(2)}
+                        </span>
+                     </div>
+                  ))
+               )}
             </div>
-            <div className="mb-6 h-[200px] overflow-auto">
-               {cartItems.map((item, index) => (
-                  <div
-                     key={index}
-                     className="flex justify-between items-center py-2 border-b"
-                  >
-                     <span className="truncate text-sm">{item?.name}</span>
-                     <span className="whitespace-nowrap">₹ {item?.price}</span>
-                  </div>
-               ))}
-            </div>
-            <div className="flex justify-between items-center font-bold mb-4">
-               <span>Sub total</span>
-               <span>₹ {calculateTotal(cartItems).toFixed(2)}</span>
+
+            <div className="space-y-3 rounded-2xl bg-slate-50/60 p-5 text-sm text-slate-600">
+               <div className="flex items-center justify-between">
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-slate-900">
+                     ₹ {calculateSubtotal(cartItems).toFixed(2)}
+                  </span>
+               </div>
+               <div className="flex items-center justify-between">
+                  <span>Delivery fee</span>
+                  <span className="font-semibold text-slate-900">
+                     ₹ {deliveryFee.toFixed(2)}
+                  </span>
+               </div>
+               <div className="flex items-center justify-between">
+                  <span>Taxes & charges</span>
+                  <span className="font-semibold text-slate-900">
+                     ₹ {taxes.toFixed(2)}
+                  </span>
+               </div>
+               <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-base font-semibold text-slate-900">
+                  <span>Payable now</span>
+                  <span>₹ {payable.toFixed(2)}</span>
+               </div>
             </div>
 
             <button
                onClick={handlePayment}
-               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 w-full rounded"
+               className="btn-primary mt-6 w-full justify-center"
+               disabled={!cartItems.length}
             >
-               PAY
+               {cartItems.length
+                  ? "Pay ₹" + payable.toFixed(2)
+                  : "Add items to continue"}
             </button>
          </div>
+
          {showSpinner && <Spinner />}
-      </div>
+      </section>
    );
 }
