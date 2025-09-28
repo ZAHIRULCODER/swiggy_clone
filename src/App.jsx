@@ -20,10 +20,12 @@ function App() {
          <RestaurantProvider>
             <Toaster />
             <Header />
-            <div className="mt-20">
-               <Outlet />
+            <div className="mt-20 min-h-[calc(100vh-5rem)] flex flex-col">
+               <div className="flex-grow">
+                  <Outlet />
+               </div>
+               <Footer />
             </div>
-            <Footer />
          </RestaurantProvider>
       </Provider>
    );

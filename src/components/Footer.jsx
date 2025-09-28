@@ -2,8 +2,8 @@ import { FaLinkedin } from "react-icons/fa6";
 
 export function Footer() {
    return (
-      <footer className="bg-gray-800 text-white">
-         <div className=" text-center p-2">
+      <footer className="bg-gray-800 text-white mt-10">
+         <div className="text-center p-2">
             <p>© {new Date().getFullYear()} Developed by ❤ SK ZAHIRUL ISLAM</p>
             <p>Follow me on Linkedin</p>
          </div>
