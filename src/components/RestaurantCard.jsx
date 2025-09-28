@@ -43,15 +43,15 @@ export function RestaurantCard({
                   </span>
                </div>
 
-               <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] uppercase tracking-wide text-slate-600">
+               <div className="flex min-w-0 items-center gap-2 text-xs font-medium text-slate-500">
+                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] uppercase tracking-wide text-slate-600">
                      {sla?.slaString}
                   </span>
                   <span
                      className="h-1 w-1 rounded-full bg-slate-300"
                      aria-hidden
                   />
-                  <span className="truncate">{areaName}</span>
+                  <span className="truncate text-right">{areaName}</span>
                </div>
 
                <p className="line-clamp-2 text-sm text-slate-500">
