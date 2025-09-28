@@ -3,7 +3,6 @@ import { BsCartCheck } from "react-icons/bs";
 import { useAuth } from "../hooks/useAuth";
 import { useLocation, Link } from "react-router-dom";
 import { Search } from "./Search";
-import brandLogo from "../assets/brand.png";
 import { CartHoverCard } from "./CartHoverCard";
 import { useSelector } from "react-redux";
 
@@ -14,13 +13,6 @@ const navLinks = [
 
 const Logo = () => (
    <Link to="/" className="group inline-flex items-center gap-2">
-      <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-white text-sm font-semibold shadow-lg ring-1 ring-slate-200 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:shadow-xl">
-         <img
-            src={brandLogo}
-            alt="Swiggy clone"
-            className="h-9 w-9 object-contain"
-         />
-      </span>
       <div className="flex flex-col">
          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
             Rapid Eats
