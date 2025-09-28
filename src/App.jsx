@@ -1,20 +1,20 @@
 import { lazy, Suspense } from "react";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import Footer from "./components/Footer";
-import HelpSupport from "./components/HelpSupport";
-import Error from "./components/Error";
+import { Header } from "./components/Header";
+import Home from "./pages/Home";
+import { Footer } from "./components/Footer";
+import HelpSupport from "./pages/HelpSupport";
+import { Error } from "./components/Error";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import RestaurantProvider from "./context/RestaurantProvider";
-import RestaurantDetail from "./components/RestaurantDetail";
+import RestaurantDetail from "./pages/RestaurantDetail";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import store from "./store/store";
-import PaymentSuccessful from "./components/PaymentSuccessful";
+import PaymentSuccessful from "./pages/PaymentSuccessful";
 
-const Checkout = lazy(() => import("./components/Checkout"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 
-const App = () => {
+function App() {
    return (
       <Provider store={store}>
          <RestaurantProvider>
@@ -27,7 +27,7 @@ const App = () => {
          </RestaurantProvider>
       </Provider>
    );
-};
+}
 
 export default App;
 
@@ -38,7 +38,7 @@ export const appRouter = createBrowserRouter([
       errorElement: <Error />,
 
       children: [
-         { path: "/", element: <Body /> },
+         { path: "/", element: <Home /> },
          { path: "/support", element: <HelpSupport /> },
          { path: "/restaurants/:resId", element: <RestaurantDetail /> },
          {
