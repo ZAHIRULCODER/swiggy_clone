@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { FaClock, FaStar } from "react-icons/fa";
-import { ShimmerUI } from "../components/ShimmerUI";
+import { RestaurantDetailShimmer } from "../components/RestaurantDetailShimmer";
 import { useRestaurantDetailFetch } from "../hooks/useRestaurantDetailFetch";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../features/cart/cartSlice";
@@ -33,7 +33,7 @@ export default function RestaurantDetail() {
    if (!restaurantDetails) return null;
 
    return restaurantDetails?.length === 0 ? (
-      <ShimmerUI />
+      <RestaurantDetailShimmer />
    ) : (
       <div className="flex justify-center mt-10 ">
          <div className="bg-white p-4 border w-[800px]">
@@ -130,5 +130,3 @@ export default function RestaurantDetail() {
       </div>
    );
 }
-
-

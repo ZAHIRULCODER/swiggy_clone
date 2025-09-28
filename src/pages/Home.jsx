@@ -1,5 +1,5 @@
 import { RestaurantCard } from "../components/RestaurantCard";
-import { ShimmerUI } from "../components/ShimmerUI";
+import { HomeShimmerUI } from "../components/HomeShimmerUI";
 import { Link } from "react-router-dom";
 import { useRestaurantFetch } from "../hooks/useRestaurantFetch";
 import { useOnline } from "../hooks/useOnline";
@@ -18,7 +18,7 @@ export default function Home() {
    }
 
    // Show loading shimmer while fetching
-   if (loading) return <ShimmerUI />;
+   if (loading) return <HomeShimmerUI />;
 
    // Early return if no restaurants are available
    if (!allRestaurants || allRestaurants.length === 0) {
