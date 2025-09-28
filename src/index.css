@@ -113,6 +113,16 @@ a:hover {
    outline-offset: 3px;
 }
 
+.btn-secondary:disabled {
+   background-color: #ffffff;
+   border-color: rgba(203, 213, 225, 0.8);
+   color: rgba(15, 23, 42, 0.45);
+   box-shadow: none;
+   cursor: not-allowed;
+   opacity: 0.75;
+   transform: none;
+}
+
 .badge-soft {
    display: inline-flex;
    align-items: center;

@@ -1,9 +1,11 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { FaClock, FaStar, FaRupeeSign } from "react-icons/fa";
 import { RestaurantDetailShimmer } from "../components/RestaurantDetailShimmer";
 import { useRestaurantDetailFetch } from "../hooks/useRestaurantDetailFetch";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../features/cart/cartSlice";
+import toast from "react-hot-toast";
 
 export default function RestaurantDetail() {
    const { resId } = useParams();
@@ -12,6 +14,11 @@ export default function RestaurantDetail() {
    const { restaurantDetails, recommended } = useRestaurantDetailFetch(resId);
 
    const dispatch = useDispatch();
+   const cartItems = useSelector((state) => state.cart?.items || []);
+   const cartItemIds = useMemo(
+      () => new Set(cartItems.map((cartItem) => cartItem?.id)),
+      [cartItems]
+   );
 
    const curatedItems =
       recommended
@@ -28,13 +35,22 @@ export default function RestaurantDetail() {
          price: unitPrice,
       };
       dispatch(addToCart(itemToAdd));
+      const itemName = item?.name?.trim() || "Item";
+      toast.success(`${itemName} added to cart`);
    };
 
    const handleRemoveItem = (item) => {
+      if (!cartItemIds.has(item?.id)) {
+         return;
+      }
       const itemToRemove = {
          id: item?.id,
       };
       dispatch(removeFromCart(itemToRemove));
+      const itemName = item?.name?.trim() || "Item";
+      toast(`${itemName} removed from cart`, {
+         icon: "🛒",
+      });
    };
 
    if (!restaurantDetails?.name) {
@@ -152,6 +168,7 @@ export default function RestaurantDetail() {
                            <button
                               onClick={() => handleRemoveItem(item)}
                               className="btn-secondary"
+                              disabled={!cartItemIds.has(item?.id)}
                            >
                               Remove
                            </button>
