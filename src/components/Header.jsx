@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsCartCheck } from "react-icons/bs";
 import { useAuth } from "../hooks/useAuth";
 import { useLocation, Link } from "react-router-dom";
@@ -27,6 +27,33 @@ const Logo = () => (
 export function Header() {
    const { isLoggedIn, SignIn, Logout } = useAuth();
    const [isCartHovered, setIsCartHovered] = useState(false);
+   const hoverTimeoutRef = useRef(null);
+
+   const openCart = () => {
+      if (hoverTimeoutRef.current) {
+         clearTimeout(hoverTimeoutRef.current);
+         hoverTimeoutRef.current = null;
+      }
+      setIsCartHovered(true);
+   };
+
+   const scheduleCartClose = () => {
+      if (hoverTimeoutRef.current) {
+         clearTimeout(hoverTimeoutRef.current);
+      }
+      hoverTimeoutRef.current = setTimeout(() => {
+         setIsCartHovered(false);
+         hoverTimeoutRef.current = null;
+      }, 160);
+   };
+
+   useEffect(() => {
+      return () => {
+         if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current);
+         }
+      };
+   }, []);
    const location = useLocation();
    const itemCount = useSelector((store) => store.cart.itemCount);
 
@@ -66,8 +93,10 @@ export function Header() {
 
                <div
                   className="relative"
-                  onMouseEnter={() => setIsCartHovered(true)}
-                  onMouseLeave={() => setIsCartHovered(false)}
+                  onMouseEnter={openCart}
+                  onMouseLeave={scheduleCartClose}
+                  onFocus={openCart}
+                  onBlur={scheduleCartClose}
                >
                   <Link
                      to="/checkout"
@@ -81,7 +110,12 @@ export function Header() {
                         {itemCount}
                      </span>
                   </Link>
-                  {isCartHovered && <CartHoverCard />}
+                  {isCartHovered && (
+                     <CartHoverCard
+                        onMouseEnter={openCart}
+                        onMouseLeave={scheduleCartClose}
+                     />
+                  )}
                </div>
 
                {isLoggedIn ? (

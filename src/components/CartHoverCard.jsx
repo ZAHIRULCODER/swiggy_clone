@@ -1,14 +1,18 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export function CartHoverCard() {
+export function CartHoverCard({ onMouseEnter, onMouseLeave }) {
    const cartItems = useSelector((store) => store.cart.items);
 
    const calculateTotal = (items) =>
       items.reduce((acc, item) => acc + item?.price * item?.quantity, 0);
 
    return (
-      <div className="absolute right-0 mt-3 w-80 origin-top-right rounded-3xl border border-slate-200/70 bg-white/95 p-5 text-slate-800 shadow-2xl shadow-slate-900/20 backdrop-blur transition">
+      <div
+         className="absolute right-0 mt-3 w-80 origin-top-right rounded-3xl border border-slate-200/70 bg-white/95 p-5 text-slate-800 shadow-2xl shadow-slate-900/20 backdrop-blur transition"
+         onMouseEnter={onMouseEnter}
+         onMouseLeave={onMouseLeave}
+      >
          {cartItems?.length === 0 ? (
             <div className="space-y-3 text-center">
                <h3 className="text-lg font-semibold text-slate-900">
