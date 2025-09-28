@@ -12,19 +12,13 @@ export const useRestaurantDetailFetch = (resId) => {
 				const response = await axios.get(
 					`${FETCH_RESTAURANT_DETAILS}&restaurantId=${resId}`
 				);
-
-				const restaurantDets = response?.data?.data?.cards[0]?.card?.card?.info;
+				const restaurantDets = response?.data?.data?.cards[2]?.card?.card?.info;
 				const recommend =
-					response?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
+					response?.data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR
 						?.cards;
 
 				setRestaurantDetails(restaurantDets);
 				setRecommended(recommend);
-
-				// console.log(
-				// 	response?.data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
-				// 		?.cards
-				// );
 			} catch (error) {
 				console.log(`Failed to Fetch Restaurant Details: ${error}`);
 			}
