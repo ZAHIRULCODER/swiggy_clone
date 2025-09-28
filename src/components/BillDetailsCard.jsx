@@ -35,7 +35,7 @@ export function BillDetailsCard() {
 
    return (
       <section className="relative w-full max-w-md">
-         <div className="surface-card rounded-3xl p-8">
+         <div className="surface-card rounded-3xl px-6 py-7 sm:px-8 sm:py-8">
             <header className="mb-6 flex items-center justify-between">
                <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-500">
@@ -53,7 +53,7 @@ export function BillDetailsCard() {
                </button>
             </header>
 
-            <div className="mb-6 max-h-56 space-y-3 overflow-auto pr-2">
+            <div className="mb-6 max-h-56 space-y-3 overflow-auto pr-1 sm:pr-2">
                {cartItems.length === 0 ? (
                   <p className="rounded-2xl bg-slate-50 px-4 py-6 text-center text-sm text-slate-500">
                      Your cart is waiting for something delicious.
@@ -62,7 +62,7 @@ export function BillDetailsCard() {
                   cartItems.map((item, index) => (
                      <div
                         key={`${item?.id}-${index}`}
-                        className="flex items-start justify-between gap-3 rounded-2xl bg-slate-50/80 px-4 py-3 text-sm"
+                        className="flex items-start justify-between gap-3 rounded-2xl bg-slate-50/80 px-3.5 py-3 text-sm sm:px-4"
                      >
                         <div>
                            <p className="text-sm font-semibold text-slate-900">
@@ -80,7 +80,7 @@ export function BillDetailsCard() {
                )}
             </div>
 
-            <div className="space-y-3 rounded-2xl bg-slate-50/60 p-5 text-sm text-slate-600">
+            <div className="space-y-3 rounded-2xl bg-slate-50/60 px-4 py-5 text-sm text-slate-600 sm:px-5">
                <div className="flex items-center justify-between">
                   <span>Subtotal</span>
                   <span className="font-semibold text-slate-900">

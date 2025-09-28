@@ -6,10 +6,7 @@ import { Search } from "./Search";
 import { CartHoverCard } from "./CartHoverCard";
 import { useSelector } from "react-redux";
 
-const navLinks = [
-   { label: "Home", to: "/" },
-   { label: "Help", to: "/support" },
-];
+const navLinks = [{ label: "Home", to: "/" }];
 
 const Logo = () => (
    <Link to="/" className="group inline-flex items-center gap-2">
@@ -54,6 +51,7 @@ export function Header() {
          }
       };
    }, []);
+   
    const location = useLocation();
    const itemCount = useSelector((store) => store.cart.itemCount);
 

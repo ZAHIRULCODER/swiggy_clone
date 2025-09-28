@@ -55,7 +55,6 @@ export function AddAdress() {
                   label: "Postal code",
                   placeholder: "Postal code",
                },
-               { field: "country", label: "Country", placeholder: "Country" },
             ].map(({ field, label, placeholder }) => (
                <label
                   key={field}
@@ -115,15 +114,9 @@ export function AddAdress() {
                   <dd className="text-slate-900">{address.state}</dd>
                </div>
             </div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-               <div>
-                  <dt className="font-semibold text-slate-500">Postal code</dt>
-                  <dd className="text-slate-900">{address.zip}</dd>
-               </div>
-               <div>
-                  <dt className="font-semibold text-slate-500">Country</dt>
-                  <dd className="text-slate-900">{address.country}</dd>
-               </div>
+            <div>
+               <dt className="font-semibold text-slate-500">Postal code</dt>
+               <dd className="text-slate-900">{address.zip}</dd>
             </div>
          </dl>
 
